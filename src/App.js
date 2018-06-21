@@ -5,7 +5,7 @@ import HomePage from './Components/HomePage'
 import './App.css';
 
 // tenho de tirar o export do users e questions no _DATA.js e usar o fetch para o metodo getusers e getquestions
-
+let userid = '';
 class App extends Component {
   constructor(props){
     super(props);
@@ -14,7 +14,9 @@ class App extends Component {
       loading: true,
       selectUser: '',
     }
+    this.selectUser = this.selectUser.bind(this);
   }
+
   componentDidMount() {
     _getUsers().then(
       (response) => {
@@ -28,11 +30,25 @@ class App extends Component {
     ).catch((error) => {
     console.log(error);
   });;
+}
+
+  selectUser(userid){
+   if (userid !== '') {
+      this.setState({
+      selectUser: userid,
+    });
+   }
+   else {
+     return 0;
+   }
+    
+   
   }
+
   render() {
     return (
       <div >
-         <LoginPage users={this.state.users} selectUser={this.state.selectUser} loading={this.state.loading} /> 
+         <LoginPage onSelect={this.selectUser} users={this.state.users} selectUser={this.state.selectUser} loading={this.state.loading} /> 
           {/*<HomePage />*/}
       </div>
     );

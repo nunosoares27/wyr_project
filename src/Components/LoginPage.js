@@ -17,7 +17,7 @@ const LoginPage = (props) => (
       {  
         Object.values(props.users).map((user) => 
           (
-             <div className="col-lg-4 col-md-4 col-xs-6 col-sm-6" key={user.id}>
+             <div className="col-lg-4 col-md-4 col-xs-6 col-sm-6" key={user.id} onClick={ () => props.onSelect(user.id)}>
           <div className={props.selectUser === user.id ? 'card activeUser' : 'card' } style={{width: "18rem"}}>
   <img className="card-img-top" style={{height: "250px"}} src={user.avatarURL ? user.avatarURL : '/img/default-user.png'} alt="Card image cap"/>
   <div className="card-body">
