@@ -1,4 +1,6 @@
 import React from "react"
+import { Link } from "react-router-dom"
+import TimeAgo from 'react-timeago'
 
 const HomePage = props => (
   <div>
@@ -10,16 +12,16 @@ const HomePage = props => (
   <div className="collapse navbar-collapse" id="navbarNav">
     <ul className="navbar-nav">
       <li className="nav-item active">
-        <a className="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        <Link className="nav-link" to="/home">Home <span className="sr-only">(current)</span></Link>
       </li>
       <li className="nav-item">
-        <a className="nav-link" href="#">Dashboard</a>
+        <Link className="nav-link" to="/dashboard">Dashboard</Link>
       </li>
       <li className="nav-item">
-        <a className="nav-link" href="#">Leader board</a>
+        <Link className="nav-link" to="/leaderboard">Leader board</Link>
       </li>
       <li className="nav-item">
-        <a className="nav-link" href="#">Add a question</a>
+        <Link className="nav-link" to="/addquestion">Add a question</Link>
       </li>
     </ul>
   </div>
@@ -33,29 +35,21 @@ const HomePage = props => (
     <li className="breadcrumb-item active" aria-current="page">Unawnsered</li>
   </ol>
 </nav>
-    <div className="card" style={{ marginBottom: "20px"}}>
-      <div className="card-body">
-        <h5 className="card-title">Special title treatment</h5>
-        <p className="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        <a href="#" className="btn btn-primary">Go somewhere</a>
-      </div>
-    </div>
 
-     <div className="card" style={{ marginBottom: "20px"}}>
+{  
+        Object.values(props.questions).map((question) => 
+          (
+                <div className="card" style={{ marginBottom: "20px"}} key={question.id}>
       <div className="card-body">
-        <h5 className="card-title">Special title treatment</h5>
-        <p className="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        <a href="#" className="btn btn-primary">Go somewhere</a>
+        <h5 className="card-title">Author: {question.author} <TimeAgo date= {new Date(question.timestamp) } /> </h5>
+        <a href="#" className="btn btn-primary">{question.optionOne.text} <span className="badge badge-secondary">Votes: {question.optionOne.votes.length}</span></a>
+         <a href="#" className="btn btn-primary">{question.optionTwo.text} <span className="badge badge-secondary">Votes: {question.optionTwo.votes.length}</span></a>
       </div>
     </div>
+           ) )
+      
+      }
 
-      <div className="card" style={{ marginBottom: "20px"}}>
-      <div className="card-body">
-        <h5 className="card-title">Special title treatment</h5>
-        <p className="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        <a href="#" className="btn btn-primary">Go somewhere</a>
-      </div>
-    </div>
 
   </div>
   </div>

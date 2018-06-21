@@ -1,4 +1,5 @@
-import React from "react";
+import React from "react"
+import {Link} from 'react-router-dom'
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css'
 import loadingImg from '../img/loading.gif'
 
@@ -28,6 +29,12 @@ const LoginPage = (props) => (
            ) )
       
       }
+      <div className="col-lg-12 col-md-12 col-sm-12 text-center" style={{ marginTop: "5vh", marginBottom: "5vh"}}>
+        
+          <Link to="/home">  <button className="btn btn-outline-success btn-lg">Login</button> </Link>
+           
+        </div>
+
        </div>
   </div>
 
