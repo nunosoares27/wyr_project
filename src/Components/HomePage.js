@@ -1,13 +1,14 @@
 import React from "react"
 import { Link } from "react-router-dom"
 import TimeAgo from 'react-timeago'
+import loadingImg from '../img/loading.gif'
 
 // {question.optionOne.votes >= 1 ? question.optionOne.votes.map(vote => {
             
 //            } ): question.optionOne.vote }
 
 const HomePage = props => (
-   
+   props.loading ? <img style={{ marginLeft: "45vw", marginTop: "35vh", width: "150px", height: "150px"}} src={loadingImg} />  :
   <div>
    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
   <a className="navbar-brand" href="#">WouldYouRather</a>
