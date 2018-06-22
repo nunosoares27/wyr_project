@@ -22,6 +22,8 @@ class App extends Component {
   }
 
   componentDidMount() {
+   
+    if(localStorage.getItem('loginUserId') === ''){
     _getUsers().then(
       (response) => {
         this.setState({
@@ -33,6 +35,20 @@ class App extends Component {
     ).catch((error) => {
     console.log(error);
   });
+
+    } else {
+      _getUsers().then(
+      (response) => {
+        this.setState({
+          users: response,
+          loading: true,
+          selectUser: localStorage.getItem('loginUserId'),
+        });
+  }
+    ).catch((error) => {
+    console.log(error);
+  });
+    }
 
 _getQuestions().then(
       (response) => {
@@ -47,12 +63,16 @@ _getQuestions().then(
   });
 
 }
+componentDidUpdate(prevProps, prevState) {
+    localStorage.setItem('loginUserId', this.state.selectUser)
+}
 
   selectUser(userid){
    if (userid !== '') {
       this.setState({
       selectUser: userid,
     });
+   
    }
    else {
      return 0;

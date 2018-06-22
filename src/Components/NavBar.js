@@ -22,6 +22,9 @@ const NavBar = (props) => (
         <NavLink className="nav-link" to="/addquestion">Add a question</NavLink>
       </li>
     </ul>
+     <span className="navbar-text ml-auto" style={{color: "white"}}>
+      {localStorage.getItem('loginUserId')}
+    </span>
   </div>
 </nav>
 
