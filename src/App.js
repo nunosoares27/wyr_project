@@ -2,11 +2,11 @@ import React, { Component } from 'react'
 import {_getUsers, _getQuestions} from './_DATA'
 import LoginPage from './Components/LoginPage'
 import HomePage from './Components/HomePage'
-import { Route, Switch, Redirect } from "react-router-dom"
+import { Route, Switch} from "react-router-dom"
 import './App.css';
 
-// tenho de tirar o export do users e questions no _DATA.js e usar o fetch para o metodo getusers e getquestions
-let userid = '';
+
+// let userid = '';
 class App extends Component {
   constructor(props){
     super(props);
