@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavLink } from "react-router-dom"
+import { NavLink, Redirect } from "react-router-dom"
 
 const NavBar = (props) => (
  <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -22,9 +22,13 @@ const NavBar = (props) => (
         <NavLink className="nav-link" to="/addquestion">Add a question</NavLink>
       </li>
     </ul>
-     <span className="navbar-text ml-auto" style={{color: "white"}}>
-      {localStorage.getItem('loginUserId')}
-    </span>
+    <span className="navbar-text ml-auto" style={{color: "white", marginRight: "20px"}}>Welcome {localStorage.getItem('loginUserId')}</span>
+     <button onClick={ () => localStorage.setItem('loginUserId', '')  } className="btn-outline-danger navbar-text" style={{color: "white"}}>
+         
+     Log Out
+
+    </button>
+  
   </div>
 </nav>
 
