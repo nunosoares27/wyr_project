@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import NavBar from './NavBar'
 import loadingImg from '../img/loading.gif'
+import {_saveQuestion} from '../_DATA'
 
 class CreateQPage extends Component {
   constructor(props){
@@ -9,6 +10,7 @@ class CreateQPage extends Component {
       fquestion: "",
       squestion: "",
     }
+    this.onFormSubmit = this.onFormSubmit.bind(this)
   }
 
 onChangeField(e, name){
@@ -18,7 +20,15 @@ onChangeField(e, name){
   })
 }
 
+onFormSubmit(e) {
+  e.preventDefault()
+  return _saveQuestion({
+    optionOneText: this.state.fquestion, optionTwoText: this.state.squestion, author: this.props.selectUser
+  }).then((res) => { this.props.createQuestion(res) } )
+}
+
 render(){
+
   return(
        this.props.loading ? <img style={{ marginLeft: "45vw", marginTop: "35vh", width: "150px", height: "150px"}} src={loadingImg} />  :
      <div>
@@ -35,7 +45,7 @@ render(){
 
  <div className="card" style={{ marginBottom: "20px"}} >
       <div className="card-body">
-        <form>
+        <form onSubmit={this.onFormSubmit}>
   <div className="row">
     <div className="col">
       <input name="fqestion" value={this.state.fquestion} onChange={(e) => this.onChangeField(e, 'fquestion')} className="form-control" placeholder="First Answer"/>

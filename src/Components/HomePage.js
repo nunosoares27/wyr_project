@@ -28,10 +28,9 @@ const HomePage = props => (
                 <div className="card" style={{ marginBottom: "20px"}} key={question.id}>
       <div className="card-body">
         <h5 className="card-title">Author: {question.author} <TimeAgo date= {new Date(question.timestamp) } /> </h5>
-        <button type="button" style={{marginRight: "15px"}} href="#" className="btn btn-primary">{question.optionOne.text} 
-          <span style={{marginLeft: "15px"}} className="badge badge-secondary" data-toggle="tooltip" title={question.optionOne.votes } data-placement="bottom">Votes: {question.optionOne.votes.length}
-            </span></button>
-         <button href="#"  title={question.optionTwo.votes } className="btn btn-primary">{question.optionTwo.text} <span style={{marginLeft: "15px"}} className="badge badge-secondary">Votes: {question.optionTwo.votes.length}</span></button>
+        <div style={{marginRight: "15px"}} href="#" >{question.optionOne.text} 
+          </div>
+         <div   title={question.optionTwo.votes } >{question.optionTwo.text} </div>
       </div>
     </div>
            ) )

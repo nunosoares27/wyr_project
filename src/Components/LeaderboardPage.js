@@ -24,8 +24,8 @@ class LeaderBoardPage extends Component {
       <tr>
         <th>Rank</th>
         <th>User</th>
-        <th>Poll Created</th>
-        <th>Poll Answered</th>
+        <th>Questions Created</th>
+        <th>Questions Answered</th>
       </tr>
     </thead>
     <tbody>

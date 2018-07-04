@@ -17,10 +17,18 @@ class App extends Component {
       users: '',
       loading: true,
       selectUser: '',
-      questions: '',
+      questions: [],
       userLogin: false
     }
-    this.selectUser = this.selectUser.bind(this);
+    this.selectUser = this.selectUser.bind(this)
+    this.createQuestion = this.createQuestion.bind(this)
+  }
+
+  createQuestion(res){
+    console.log(res)
+    this.setState({
+      questions: {...this.state.questions, [res.id]: res }
+    })
   }
 
   componentDidMount() {
@@ -69,9 +77,9 @@ componentDidUpdate(prevProps, prevState) {
           {localStorage.getItem('loginUserId') !== '' ? (<Fragment>
          <Route exact path="/" render={() => (<LoginPage onSelect={this.selectUser} users={this.state.users} selectUser={this.state.selectUser} loading={this.state.loading} />
          )} />
-         <Route exact path="/leaderboard" render={() => ( <LeaderboardPage  selectUser={this.selectUser}  loading={this.state.loading} /> ) } />
-         <Route exact path="/home" render={() => ( <HomePage  selectUser={this.selectUser} questions={this.state.questions} loading={this.state.loading} /> ) } />
-         <Route exact path="/addquestion" render={() => ( <CreateQPage  selectUser={this.selectUser} loading={this.state.loading} /> ) } />
+         <Route exact path="/leaderboard" render={() => ( <LeaderboardPage  selectUser={this.state.selectUser}  loading={this.state.loading} /> ) } />
+         <Route exact path="/home" render={() => ( <HomePage  selectUser={this.state.selectUser} questions={this.state.questions} loading={this.state.loading} /> ) } />
+         <Route exact path="/addquestion" render={() => ( <CreateQPage createQuestion={this.createQuestion}  selectUser={this.state.selectUser} loading={this.state.loading} /> ) } />
            </Fragment> )  : 
          <Route component={Page404}/>
           }
