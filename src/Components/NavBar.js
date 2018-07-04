@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavLink, Redirect } from "react-router-dom"
+import { NavLink, withRouter } from "react-router-dom"
 
 const NavBar = (props) => (
  <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -13,9 +13,6 @@ const NavBar = (props) => (
         <NavLink className="nav-link"  to="/home">Home <span className="sr-only">(current)</span></NavLink>
       </li>
       <li className="nav-item">
-        <NavLink className="nav-link" to="/dashboard">Dashboard</NavLink>
-      </li>
-      <li className="nav-item">
         <NavLink className="nav-link" to="/leaderboard">Leader board</NavLink>
       </li>
       <li className="nav-item">
@@ -23,7 +20,7 @@ const NavBar = (props) => (
       </li>
     </ul>
     <span className="navbar-text ml-auto" style={{color: "white", marginRight: "20px"}}>Welcome {localStorage.getItem('loginUserId')}</span>
-     <button onClick={ () => localStorage.setItem('loginUserId', '')  } className="btn-outline-danger navbar-text" style={{color: "white"}}>
+     <button onClick={ () => { props.history.push('/');}  } className="btn-outline-danger navbar-text" style={{color: "white"}}>
          
      Log Out
 
@@ -33,4 +30,4 @@ const NavBar = (props) => (
 </nav>
 
 )
-export default NavBar
+export default withRouter(NavBar)

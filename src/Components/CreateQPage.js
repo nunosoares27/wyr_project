@@ -1,9 +1,26 @@
-import React from 'react'
+import React, {Component} from 'react'
 import NavBar from './NavBar'
 import loadingImg from '../img/loading.gif'
 
-const CreateQPage = (props) => (
-     props.loading ? <img style={{ marginLeft: "45vw", marginTop: "35vh", width: "150px", height: "150px"}} src={loadingImg} />  :
+class CreateQPage extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      fquestion: "",
+      squestion: "",
+    }
+  }
+
+onChangeField(e, name){
+   
+  this.setState({
+    [name]: e.target.value
+  })
+}
+
+render(){
+  return(
+       this.props.loading ? <img style={{ marginLeft: "45vw", marginTop: "35vh", width: "150px", height: "150px"}} src={loadingImg} />  :
      <div>
 
      <NavBar />
@@ -21,10 +38,10 @@ const CreateQPage = (props) => (
         <form>
   <div className="row">
     <div className="col">
-      <input type="text" className="form-control" placeholder="First Answer"/>
+      <input name="fqestion" value={this.state.fquestion} onChange={(e) => this.onChangeField(e, 'fquestion')} className="form-control" placeholder="First Answer"/>
     </div>
     <div className="col">
-      <input type="text" className="form-control" placeholder="Second Answer"/>
+      <input name="sqestion" value={this.state.squestion} onChange={(e) =>this.onChangeField(e, 'squestion')} className="form-control" placeholder="Second Answer"/>
     </div>
   </div>
   <button style={{ marginTop: "35px"}} className="btn btn-outline-default btn-md">Cancel</button>
@@ -36,11 +53,9 @@ const CreateQPage = (props) => (
 </div>
 </div>
 
-
-
-
-
 </div>
-);
+  );
+}
+}
 
 export default CreateQPage;

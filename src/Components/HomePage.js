@@ -17,9 +17,8 @@ const HomePage = props => (
   <div className="col-lg-8 offset-lg-2">
     <nav aria-label="breadcrumb">
   <ol className="breadcrumb">
-    <li className="breadcrumb-item active"><a href="#">All</a></li>
-    <li className="breadcrumb-item"><a href="#">Awnsered</a></li>
-    <li className="breadcrumb-item " ><a href="#">Unawnsered</a></li>
+    <li className="breadcrumb-item active"><a href="#">Answered</a></li>
+    <li className="breadcrumb-item " ><a href="#">Unanswered</a></li>
   </ol>
 </nav>
 

@@ -1,9 +1,10 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import {_getUsers, _getQuestions} from './_DATA'
 import LoginPage from './Components/LoginPage'
 import HomePage from './Components/HomePage'
 import CreateQPage from './Components/CreateQPage'
 import Page404 from './Components/Page404'
+import LeaderboardPage from './Components/LeaderboardPage'
 import { Route, Switch} from "react-router-dom"
 import './App.css';
 
@@ -17,38 +18,22 @@ class App extends Component {
       loading: true,
       selectUser: '',
       questions: '',
+      userLogin: false
     }
     this.selectUser = this.selectUser.bind(this);
   }
 
   componentDidMount() {
    
-    if(localStorage.getItem('loginUserId') === ''){
+ 
     _getUsers().then(
       (response) => {
         this.setState({
           users: response,
           loading: true,
           selectUser: 'tylermcginnis'
-        });
-  }
-    ).catch((error) => {
-    console.log(error);
-  });
-
-    } else {
-      _getUsers().then(
-      (response) => {
-        this.setState({
-          users: response,
-          loading: true,
-          selectUser: localStorage.getItem('loginUserId'),
-        });
-  }
-    ).catch((error) => {
-    console.log(error);
-  });
-    }
+        })});
+    
 
 _getQuestions().then(
       (response) => {
@@ -57,9 +42,6 @@ _getQuestions().then(
           questions: response,
           loading: false,
         });
-  }
-    ).catch((error) => {
-    console.log(error);
   });
 
 }
@@ -84,11 +66,15 @@ componentDidUpdate(prevProps, prevState) {
     return (
       <div >
         <Switch>
+          {localStorage.getItem('loginUserId') !== '' ? (<Fragment>
          <Route exact path="/" render={() => (<LoginPage onSelect={this.selectUser} users={this.state.users} selectUser={this.state.selectUser} loading={this.state.loading} />
          )} />
-         <Route exact path="/home" render={() => ( <HomePage questions={this.state.questions} loading={this.state.loading} /> ) } />
-         <Route exact path="/addquestion" render={() => ( <CreateQPage loading={this.state.loading} /> ) } />
+         <Route exact path="/leaderboard" render={() => ( <LeaderboardPage  selectUser={this.selectUser}  loading={this.state.loading} /> ) } />
+         <Route exact path="/home" render={() => ( <HomePage  selectUser={this.selectUser} questions={this.state.questions} loading={this.state.loading} /> ) } />
+         <Route exact path="/addquestion" render={() => ( <CreateQPage  selectUser={this.selectUser} loading={this.state.loading} /> ) } />
+           </Fragment> )  : 
          <Route component={Page404}/>
+          }
        </Switch>
       </div>
     );
