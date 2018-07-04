@@ -14,7 +14,6 @@ class CreateQPage extends Component {
   }
 
 onChangeField(e, name){
-   
   this.setState({
     [name]: e.target.value
   })

@@ -14,7 +14,7 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      users: '',
+      users: [],
       loading: true,
       selectUser: '',
       questions: [],
@@ -25,7 +25,6 @@ class App extends Component {
   }
 
   createQuestion(res){
-    console.log(res)
     this.setState({
       questions: {...this.state.questions, [res.id]: res }
     })
@@ -45,7 +44,6 @@ class App extends Component {
 
 _getQuestions().then(
       (response) => {
-        console.log(response);
         this.setState({
           questions: response,
           loading: false,
@@ -78,7 +76,7 @@ componentDidUpdate(prevProps, prevState) {
          <Route exact path="/" render={() => (<LoginPage onSelect={this.selectUser} users={this.state.users} selectUser={this.state.selectUser} loading={this.state.loading} />
          )} />
          <Route exact path="/leaderboard" render={() => ( <LeaderboardPage  selectUser={this.state.selectUser}  loading={this.state.loading} /> ) } />
-         <Route exact path="/home" render={() => ( <HomePage  selectUser={this.state.selectUser} questions={this.state.questions} loading={this.state.loading} /> ) } />
+         <Route exact path="/home" render={() => ( <HomePage usersResponses={Object.values(this.state.users).filter( user => user.id === this.state.selectUser)}  selectUser={this.state.selectUser} questions={this.state.questions} loading={this.state.loading} /> ) } />
          <Route exact path="/addquestion" render={() => ( <CreateQPage createQuestion={this.createQuestion}  selectUser={this.state.selectUser} loading={this.state.loading} /> ) } />
            </Fragment> )  : 
          <Route component={Page404}/>
