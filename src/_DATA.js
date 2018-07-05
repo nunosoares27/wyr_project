@@ -24,7 +24,7 @@
   johndoe: {
     id: 'johndoe',
     name: 'John Doe',
-    avatarURL: '' ,
+    avatarURL: '/img/default-user.png' ,
     answers: {
       "xj352vofupe1dqz9emx13r": 'optionOne',
       "vthrdm985a262al8qx3do": 'optionTwo',

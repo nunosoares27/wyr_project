@@ -38,7 +38,8 @@ class App extends Component {
         this.setState({
           users: response,
           loading: true,
-          selectUser: 'tylermcginnis'
+          selectUser: 'tylermcginnis',
+          selectIcon: '/img/mcginnis.jpg'
         })});
     
 
@@ -52,13 +53,16 @@ _getQuestions().then(
 
 }
 componentDidUpdate(prevProps, prevState) {
-    localStorage.setItem('loginUserId', this.state.selectUser)
+  localStorage.setItem('loginUserId', this.state.selectUser)
+  localStorage.setItem('loginUserIcon', this.state.selectIcon)
+  console.log( localStorage.getItem('loginUserIcon') )   
 }
 
   selectUser(userid){
    if (userid !== '') {
       this.setState({
       selectUser: userid,
+      selectIcon: Object.values(this.state.users).filter(user => user.id === userid).map(u => u.avatarURL)
     });
    
    }
@@ -76,7 +80,9 @@ componentDidUpdate(prevProps, prevState) {
          <Route exact path="/" render={() => (<LoginPage onSelect={this.selectUser} users={this.state.users} selectUser={this.state.selectUser} loading={this.state.loading} />
          )} />
          <Route exact path="/leaderboard" render={() => ( <LeaderboardPage  selectUser={this.state.selectUser}  loading={this.state.loading} /> ) } />
-         <Route exact path="/home" render={() => ( <HomePage usersResponses={Object.values(this.state.users).filter( user => user.id === this.state.selectUser)}  selectUser={this.state.selectUser} questions={this.state.questions} loading={this.state.loading} /> ) } />
+         <Route exact path="/home" render={() => ( <HomePage usersResponses={Object.values(this.state.users).filter( user => user.id === this.state.selectUser)}
+             selectUser={this.state.selectUser} questions={this.state.questions} 
+             loading={this.state.loading} /> ) } />
          <Route exact path="/addquestion" render={() => ( <CreateQPage createQuestion={this.createQuestion}  selectUser={this.state.selectUser} loading={this.state.loading} /> ) } />
            </Fragment> )  : 
          <Route component={Page404}/>
