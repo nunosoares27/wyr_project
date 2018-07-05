@@ -19,10 +19,17 @@ const NavBar = (props) => (
         <NavLink className="nav-link" to="/addquestion">Add a question</NavLink>
       </li>
     </ul>
-    <span className="navbar-text ml-auto" style={{color: "white", marginRight: "20px"}}>Welcome <img className="rounded" style={{height: "25px", width: "25px"}} 
+    <span className="navbar-text ml-auto" style={{color: "white", marginRight: "20px"}}>Welcome 
+     
+      <img style={{height: "60px", width: "60px", borderRadius: "50%", marginLeft: "15px", marginRight: "15px" }} 
     src={localStorage.getItem('loginUserIcon') ? localStorage.getItem('loginUserIcon') : '/img/default-user.png' } alt='Card image cap'/>
-        {localStorage.getItem('loginUserId')}</span>
-     <button onClick={ () => { props.history.push('/');}  } className="btn-outline-danger navbar-text" style={{color: "white"}}>
+
+        {localStorage.getItem('loginUserId').toUpperCase()}</span>
+     <button onClick={ () => { 
+        localStorage.setItem('loginUserId', '')
+        localStorage.setItem('loginUserIcon', '')
+        props.history.push('/login');
+       }  } className="btn-outline-danger navbar-text" style={{color: "white"}}>
          
      Log Out
 

@@ -77,15 +77,22 @@ componentDidUpdate(prevProps, prevState) {
       <div >
         <Switch>
           {localStorage.getItem('loginUserId') !== '' ? (<Fragment>
-         <Route exact path="/" render={() => (<LoginPage onSelect={this.selectUser} users={this.state.users} selectUser={this.state.selectUser} loading={this.state.loading} />
-         )} />
-         <Route exact path="/leaderboard" render={() => ( <LeaderboardPage  selectUser={this.state.selectUser}  loading={this.state.loading} /> ) } />
-         <Route exact path="/home" render={() => ( <HomePage usersResponses={Object.values(this.state.users).filter( user => user.id === this.state.selectUser)}
+             <Route exact path="/home" render={() => ( <HomePage usersResponses={Object.values(this.state.users).filter( user => user.id === this.state.selectUser)}
              selectUser={this.state.selectUser} questions={this.state.questions} 
              loading={this.state.loading} /> ) } />
+             <Route exact path="/login" render={() => ( <HomePage usersResponses={Object.values(this.state.users).filter( user => user.id === this.state.selectUser)}
+             selectUser={this.state.selectUser} questions={this.state.questions} 
+             loading={this.state.loading} /> ) } />
+         <Route exact path="/leaderboard" render={() => ( <LeaderboardPage  selectUser={this.state.selectUser}  loading={this.state.loading} /> ) } />
          <Route exact path="/addquestion" render={() => ( <CreateQPage createQuestion={this.createQuestion}  selectUser={this.state.selectUser} loading={this.state.loading} /> ) } />
            </Fragment> )  : 
-         <Route component={Page404}/>
+           <Fragment>
+             <Route exact path="/login" render={() => (<LoginPage onSelect={this.selectUser} users={this.state.users} selectUser={this.state.selectUser} loading={this.state.loading} />
+         )} />
+         <Route exact path="/leaderboard"  component={Page404}/>
+          <Route exact path="/addquestion"  component={Page404}/>
+           <Route exact path="/"  component={Page404}/>
+         </Fragment>
           }
        </Switch>
       </div>
