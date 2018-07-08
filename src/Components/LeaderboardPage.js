@@ -3,8 +3,16 @@ import NavBar from './NavBar'
 import loadingImg from '../img/loading.gif'
 
 class LeaderBoardPage extends Component {
+    constructor(props){
+        super(props);
+        this.state ={
+
+        }
+    }
     render() {
         return (
+
+            console.log(this.props.users),
             this.props.loading ? <img style={{ marginLeft: "45vw", marginTop: "35vh", width: "150px", height: "150px"}} src={loadingImg} />  : (
         <div>
 
@@ -29,24 +37,20 @@ class LeaderBoardPage extends Component {
       </tr>
     </thead>
     <tbody>
-      <tr>
+        {
+            Object.values(this.props.users).map(user => (
+            <tr key={user.id}>
         <td>1</td>
-        <td>Tyler</td>
-        <td>4</td>
-        <td>5</td>
+        <td>{user.name}</td>
+        <td>{user.questions.length}</td>
+        <td>{Object.values(user.answers).length}</td>
       </tr>
-     <tr>
-        <td>1</td>
-        <td>Tyler</td>
-        <td>4</td>
-        <td>5</td>
-      </tr>
-     <tr>
-        <td>1</td>
-        <td>Tyler</td>
-        <td>4</td>
-        <td>5</td>
-      </tr>
+        )) 
+        
+        } 
+        
+      
+  
     </tbody>
   </table>
 
