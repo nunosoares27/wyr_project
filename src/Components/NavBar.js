@@ -12,7 +12,7 @@ const NavBar = (props) => (
   <div className="collapse navbar-collapse" id="navbarNav">
     <ul className="navbar-nav">
       <li className="nav-item" >
-        <NavLink className="nav-link"  to="/home">Home <span className="sr-only">(current)</span></NavLink>
+        <NavLink className="nav-link"  to="/">Home <span className="sr-only">(current)</span></NavLink>
       </li>
       <li className="nav-item">
         <NavLink className="nav-link" to="/leaderboard">Leader board</NavLink>
