@@ -1,10 +1,9 @@
 import React from 'react'
-import NavBar from './NavBar'
 
 const Page404 = (props) => (
  <div>
 
-<NavBar/>
+
 
 
 <div className="row" style={{ marginTop: "60px"}}>
@@ -19,7 +18,7 @@ const Page404 = (props) => (
       <div className="card-body">
       <h1 className="card-title text-center" >404</h1>
      <h2 className="text-center">Oops, the page you're
-looking for does not exist.</h2>
+looking for does not exist. Or you are not Login.</h2>
       </div>
     </div>
 

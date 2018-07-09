@@ -1,5 +1,4 @@
 import React, {Component} from "react";
-import NavBar from "./NavBar";
 import TimeAgo from "react-timeago";
 import loadingImg from "../img/loading.gif";
 
@@ -44,9 +43,7 @@ render(){
         ).map(aq => props.questions !== props.questions[aq])     ) 
        */}
 
-     
-      <NavBar />
-
+  
       <div className="row" style={{ marginTop: "60px" }}>
         <div className="col-lg-8 offset-lg-2">
           <nav aria-label="breadcrumb">

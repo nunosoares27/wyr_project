@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import NavBar from './NavBar'
 import loadingImg from '../img/loading.gif'
 
 class LeaderBoardPage extends Component {
@@ -11,13 +10,10 @@ class LeaderBoardPage extends Component {
     }
     render() {
         return (
-
-            console.log(this.props.users),
             this.props.loading ? <img style={{ marginLeft: "45vw", marginTop: "35vh", width: "150px", height: "150px"}} src={loadingImg} />  : (
         <div>
 
-            <NavBar/>
-
+          
 
             <div className="row" style={{ marginTop: "60px"}}>
             <div className="col-lg-8 offset-lg-2">
@@ -41,7 +37,9 @@ class LeaderBoardPage extends Component {
             Object.values(this.props.users).map(user => (
             <tr key={user.id}>
         <td>1</td>
-        <td>{user.name}</td>
+        <td> <img style={{height: "60px", width: "60px", borderRadius: "50%", marginLeft: "15px", marginRight: "15px" }} 
+    src={user.avatarURL ? user.avatarURL : '/img/default-user.png' } alt='Card image cap'/>
+{user.name}</td>
         <td>{user.questions.length}</td>
         <td>{Object.values(user.answers).length}</td>
       </tr>

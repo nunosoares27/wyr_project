@@ -15,9 +15,11 @@ const LoginPage = (props) => (
         </h1>
         <p className="text-center">Select one user</p>
         </div>
+         
       {  
         Object.values(props.users).map((user) => 
           (
+           
              <div className="col-lg-4 col-md-4 col-xs-6 col-sm-6" key={user.id} onClick={ () => props.onSelect(user.id)}>
           <div className={props.selectUser === user.id ? 'card activeUser' : 'card' } style={{width: "18rem"}}>
   <img className="card-img-top" style={{height: "250px"}} src={user.avatarURL ? user.avatarURL : '/img/default-user.png'} alt="Card image cap"/>
@@ -26,14 +28,17 @@ const LoginPage = (props) => (
   </div>
    </div>
          </div>
+        
            ) )
       
       }
       <div className="col-lg-12 col-md-12 col-sm-12 text-center" style={{ marginTop: "5vh", marginBottom: "5vh"}}>
         
-          <Link to="/home">  <button className="btn btn-outline-success btn-lg">Login</button> </Link>
-           
+          <button onClick={props.onUserLogin} className="btn btn-outline-success btn-lg">Login</button>
+       
         </div>
+
+        
 
        </div>
   </div>

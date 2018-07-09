@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import NavBar from './NavBar'
 import loadingImg from '../img/loading.gif'
 import {_saveQuestion} from '../_DATA'
 
@@ -32,7 +31,6 @@ render(){
        this.props.loading ? <img style={{ marginLeft: "45vw", marginTop: "35vh", width: "150px", height: "150px"}} src={loadingImg} />  :
      <div>
 
-     <NavBar />
 
 <div className="row" style={{ marginTop: "60px"}}>
   <div className="col-lg-8 offset-lg-2">
