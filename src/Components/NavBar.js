@@ -1,18 +1,19 @@
 import React from 'react'
 import { NavLink, withRouter } from "react-router-dom"
+import { connect } from 'react-redux'
 
 const NavBar = (props) => (
  <div>
-    {props.loginUser !== '' ? (
+    {props.loginUser !== null ? (
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a className="navbar-brand" href="#">WouldYouRather</a>
+  <NavLink className="navbar-brand" to="/">WouldYouRather</NavLink>
   <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span className="navbar-toggler-icon"></span>
   </button>
   <div className="collapse navbar-collapse" id="navbarNav">
     <ul className="navbar-nav">
       <li className="nav-item" >
-        <NavLink className="nav-link"  to="/">Home <span className="sr-only">(current)</span></NavLink>
+        <NavLink className="nav-link" to="/">Home</NavLink>
       </li>
       <li className="nav-item">
         <NavLink className="nav-link" to="/leaderboard">Leader board</NavLink>
@@ -27,7 +28,7 @@ const NavBar = (props) => (
       <img style={{height: "60px", width: "60px", borderRadius: "50%", marginLeft: "15px", marginRight: "15px" }} 
     src={props.selectIcon ? props.selectIcon : '/img/default-user.png' } alt='Card image cap'/>
 
-        {props.loginUser.toUpperCase()}</span>
+        {props.loginUser}</span>
      <button onClick={ props.onUserLogout
        }  className="btn-outline-danger navbar-text" style={{color: "white"}}>
          
@@ -47,7 +48,7 @@ const NavBar = (props) => (
   <div className="collapse navbar-collapse" id="navbarNav">
     <div className="ml-auto">
      <button onClick={ () => { 
-        props.history.push('/login');
+        props.history.push('/');
        }  } className="btn-outline-danger navbar-text" style={{color: "white"}}>
          
      Log In
@@ -62,4 +63,14 @@ const NavBar = (props) => (
  </div>
 
 )
+
+
+const mapStateToProps = state => {
+  return {
+     loginUser: state.loginUser
+  }
+}
+
+
+
 export default withRouter(NavBar)

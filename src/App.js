@@ -8,6 +8,9 @@ import LeaderboardPage from './Components/LeaderboardPage'
 import NavBar from './Components/NavBar'
 import {Route, Switch, withRouter} from "react-router-dom"
 import './App.css';
+import { connect } from 'react-redux'
+import { LoginUser, LogOutUser } from './actions/authentication'
+import { bindActionCreators } from 'redux'
 
 
 // let userid = '';
@@ -18,7 +21,6 @@ class App extends Component {
       users: [],
       loading: true,
       selectUser: '',
-      loginUser:'',
       questions: [],
       userLogin: false
     }
@@ -29,17 +31,11 @@ class App extends Component {
   }
 
   onUserLogout(){
-     this.setState({
-        loginUser: '',
-        selectIcon: ''
-      })
+    this.props.LogOutUser()
   }
 
   onUserLogin(){
-      this.setState({
-        loginUser: this.state.selectUser,
-        selectIcon: this.state.selectIcon
-      });
+      this.props.LoginUser(this.state.selectUser)
   }
 
   createQuestion(res){
@@ -93,17 +89,19 @@ componentDidUpdate(prevProps, prevState) {
   render() {
     return (
       <div >
-        <NavBar onUserLogout={this.onUserLogout}  loginUser={this.state.loginUser} selectIcon={this.state.selectIcon}   />
+        <NavBar onUserLogout={this.onUserLogout}  loginUser={this.props.loginUser} selectIcon={this.state.selectIcon}   />
         <Switch>
-          {this.state.loginUser !== '' ? (<Fragment>
-             <Route exact path="/" render={() => ( <HomePage loginUser={this.state.loginUser} usersResponses={Object.values(this.state.users).filter( user => user.id === this.state.selectUser)}
-             selectUser={this.state.selectUser} questions={this.state.questions} 
+          {this.props.loginUser !== null && this.props.loginUser !== undefined && this.props.loginUser !== ''  ? 
+            ( <Fragment>
+             <Route path="/" exact render={() => ( <HomePage selectUser={this.state.selectUser} loginUser={this.state.loginUser} usersResponses={Object.values(this.state.users).filter( user => user.id === this.state.selectUser)}
+             questions={this.state.questions} 
              loading={this.state.loading} /> ) } />
-         <Route exact path="/leaderboard" render={() => ( <LeaderboardPage  users={this.state.users}  selectUser={this.state.selectUser}  loading={this.state.loading} /> ) } />
-         <Route exact path="/addquestion" render={() => ( <CreateQPage createQuestion={this.createQuestion}  selectUser={this.state.selectUser} loading={this.state.loading} /> ) } />
-           </Fragment> )  : 
-             <Route exact path="/" render={() => (<LoginPage onUserLogin={this.onUserLogin} onSelect={this.selectUser} users={this.state.users} selectUser={this.state.selectUser} loading={this.state.loading} />
-         )} />
+         <Route exact  path="/leaderboard" render={() => ( <LeaderboardPage  users={this.state.users}   loading={this.state.loading} /> ) } />
+         <Route exact path="/addquestion" render={() => ( <CreateQPage createQuestion={this.createQuestion}   loading={this.state.loading} /> ) } />
+           </Fragment> )
+           : (
+              <Route exact={true} path="/" render={() => (<LoginPage onUserLogin={this.onUserLogin} onSelect={this.selectUser} users={this.state.users} selectUser={this.state.selectUser} loading={this.state.loading} />
+         )} /> )
           }
              <Route component={Page404}/>
        </Switch>
@@ -112,4 +110,16 @@ componentDidUpdate(prevProps, prevState) {
   }
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+     loginUser: state.loginUser
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({
+    LoginUser, LogOutUser
+  }, dispatch)
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps) (App) );
