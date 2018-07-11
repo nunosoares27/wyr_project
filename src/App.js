@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import {_getUsers, _getQuestions} from './_DATA'
+// import {_getUsers, _getQuestions} from './_DATA'
 import LoginPage from './Components/LoginPage'
 import HomePage from './Components/HomePage'
 import CreateQPage from './Components/CreateQPage'
@@ -10,6 +10,7 @@ import {Route, Switch, withRouter} from "react-router-dom"
 import './App.css';
 import { connect } from 'react-redux'
 import { LoginUser, LogOutUser } from './actions/authentication'
+import { initialData } from './actions/common'
 import { bindActionCreators } from 'redux'
 
 
@@ -19,7 +20,7 @@ class App extends Component {
     super(props);
     this.state = {
       users: [],
-      loading: true,
+      loading: false,
       selectUser: '',
       questions: [],
       userLogin: false
@@ -46,25 +47,35 @@ class App extends Component {
   }
 
   componentDidMount() {
-   
- 
-    _getUsers().then(
-      (response) => {
-        this.setState({
-          users: response,
-          loading: true,
-          selectUser: 'tylermcginnis',
-          selectIcon: '/img/mcginnis.jpg'
-        })});
+      
+       
+      //  this.setState({
+      //     loading: true,
+      //     selectUser: 'tylermcginnis',
+      //     selectIcon: '/img/mcginnis.jpg'
+      //   })
+
+    this.props.initialData()
+   //   this.props.users !== null ? console.log(this.props.users) : console.log('bosta')
+
+
+    // _getUsers().then(
+    //   (response) => {
+    //     this.setState({
+    //       users: response,
+    //       loading: true,
+    //       selectUser: 'tylermcginnis',
+    //       selectIcon: '/img/mcginnis.jpg'
+    //     })});
     
 
-_getQuestions().then(
-      (response) => {
-        this.setState({
-          questions: response,
-          loading: false,
-        });
-  });
+  //  _getQuestions().then(
+  //     (response) => {
+  //       this.setState({
+  //         questions: response,
+  //         loading: false,
+  //       });
+  // });
 
 }
 componentDidUpdate(prevProps, prevState) {
@@ -76,7 +87,7 @@ componentDidUpdate(prevProps, prevState) {
    if (userid !== '') {
       this.setState({
       selectUser: userid,
-      selectIcon: Object.values(this.state.users).filter(user => user.id === userid).map(u => u.avatarURL)
+      selectIcon: Object.values(this.props.users).filter(user => user.id === userid).map(u => u.avatarURL)
     });
    
    }
@@ -92,15 +103,23 @@ componentDidUpdate(prevProps, prevState) {
         <NavBar onUserLogout={this.onUserLogout}  loginUser={this.props.loginUser} selectIcon={this.state.selectIcon}   />
         <Switch>
           {this.props.loginUser !== null && this.props.loginUser !== undefined && this.props.loginUser !== ''  ? 
-            ( <Fragment>
-             <Route path="/" exact render={() => ( <HomePage selectUser={this.state.selectUser} loginUser={this.state.loginUser} usersResponses={Object.values(this.state.users).filter( user => user.id === this.state.selectUser)}
+            ( 
+              <Fragment>
+             {/*<Route path="/" exact render={() => ( <HomePage selectUser={this.state.selectUser} loginUser={this.state.loginUser} usersResponses={Object.values(this.props.users).filter( user => user.id === this.state.selectUser)}
              questions={this.state.questions} 
              loading={this.state.loading} /> ) } />
-         <Route exact  path="/leaderboard" render={() => ( <LeaderboardPage  users={this.state.users}   loading={this.state.loading} /> ) } />
-         <Route exact path="/addquestion" render={() => ( <CreateQPage createQuestion={this.createQuestion}   loading={this.state.loading} /> ) } />
-           </Fragment> )
+         <Route exact  path="/leaderboard" render={() => ( <LeaderboardPage  users={this.props.users}   loading={this.state.loading} /> ) } />
+         <Route exact path="/addquestion" render={() => ( <CreateQPage createQuestion={this.createQuestion}   loading={this.state.loading} /> ) } />*/}
+           </Fragment> 
+           )
            : (
-              <Route exact={true} path="/" render={() => (<LoginPage onUserLogin={this.onUserLogin} onSelect={this.selectUser} users={this.state.users} selectUser={this.state.selectUser} loading={this.state.loading} />
+              <Route exact={true} path="/" render={() => (<LoginPage 
+           //   onUserLogin={this.onUserLogin} 
+           //   onSelect={this.selectUser}
+          //    users={this.props.users} 
+            //  selectUser={this.state.selectUser} 
+            //  loading={this.state.loading
+              />
          )} /> )
           }
              <Route component={Page404}/>
@@ -112,13 +131,13 @@ componentDidUpdate(prevProps, prevState) {
 
 const mapStateToProps = state => {
   return {
-     loginUser: state.loginUser
+     loginUser: state.loginUser,
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
-    LoginUser, LogOutUser
+    LoginUser, LogOutUser, initialData
   }, dispatch)
 }
 

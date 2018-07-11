@@ -1,6 +1,6 @@
 import { LOGIN, LOGOUT } from '../actions/actionTypes'
 
-export default function loginReducer(state=null, action)
+const loginReducer = (state=null, action) =>
 {
     switch(action.type){
         case LOGIN:
@@ -11,3 +11,5 @@ export default function loginReducer(state=null, action)
         return state
     }
 }
+
+export default loginReducer
