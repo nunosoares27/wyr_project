@@ -87,7 +87,7 @@ componentDidUpdate(prevProps, prevState) {
    if (userid !== '') {
       this.setState({
       selectUser: userid,
-      selectIcon: Object.values(this.props.users).filter(user => user.id === userid).map(u => u.avatarURL)
+  //    selectIcon: Object.values(this.props.users).filter(user => user.id === userid).map(u => u.avatarURL)
     });
    
    }
@@ -114,10 +114,10 @@ componentDidUpdate(prevProps, prevState) {
            )
            : (
               <Route exact={true} path="/" render={() => (<LoginPage 
-           //   onUserLogin={this.onUserLogin} 
-           //   onSelect={this.selectUser}
-          //    users={this.props.users} 
-            //  selectUser={this.state.selectUser} 
+              onUserLogin={this.onUserLogin} 
+              onSelect={this.selectUser}
+          //   users={this.props.users} 
+              selectUser={this.state.selectUser} 
             //  loading={this.state.loading
               />
          )} /> )
