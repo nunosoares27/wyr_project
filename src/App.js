@@ -49,45 +49,24 @@ class App extends Component {
   componentDidMount() {
       
        
-      //  this.setState({
-      //     loading: true,
-      //     selectUser: 'tylermcginnis',
-      //     selectIcon: '/img/mcginnis.jpg'
-      //   })
+       this.setState({
+          selectUser: 'tylermcginnis',
+          selectIcon: '/img/mcginnis.jpg'
+        })
 
     this.props.initialData()
-   //   this.props.users !== null ? console.log(this.props.users) : console.log('bosta')
 
-
-    // _getUsers().then(
-    //   (response) => {
-    //     this.setState({
-    //       users: response,
-    //       loading: true,
-    //       selectUser: 'tylermcginnis',
-    //       selectIcon: '/img/mcginnis.jpg'
-    //     })});
-    
-
-  //  _getQuestions().then(
-  //     (response) => {
-  //       this.setState({
-  //         questions: response,
-  //         loading: false,
-  //       });
-  // });
 
 }
 componentDidUpdate(prevProps, prevState) {
-  // localStorage.setItem('loginUserId', this.state.selectUser)
-  // localStorage.setItem('loginUserIcon', this.state.selectIcon)  
+ 
 }
 
   selectUser(userid){
    if (userid !== '') {
       this.setState({
       selectUser: userid,
-  //    selectIcon: Object.values(this.props.users).filter(user => user.id === userid).map(u => u.avatarURL)
+      selectIcon: Object.values(this.props.users).filter(user => user.id === userid).map(u => u.avatarURL)
     });
    
    }
@@ -116,7 +95,6 @@ componentDidUpdate(prevProps, prevState) {
               <Route exact={true} path="/" render={() => (<LoginPage 
               onUserLogin={this.onUserLogin} 
               onSelect={this.selectUser}
-          //   users={this.props.users} 
               selectUser={this.state.selectUser} 
             //  loading={this.state.loading
               />
@@ -132,6 +110,7 @@ componentDidUpdate(prevProps, prevState) {
 const mapStateToProps = state => {
   return {
      loginUser: state.loginUser,
+     users: state.users
   }
 }
 
