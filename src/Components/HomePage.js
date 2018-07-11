@@ -66,7 +66,7 @@ render(){
             )
           }*/}
 
-  { this.state.tabAnswered === false ? Object.keys(this.props.usersResponses[0].answers)
+  { this.state.tabAnswered === false && this.props.usersResponses !== null ? Object.keys(this.props.usersResponses[0].answers)
   .sort((a, b) => this.props.questions[b].timestamp - this.props.questions[a].timestamp)
   .map(aq => this.props.questions[aq]).map(question => (
             <div
@@ -124,7 +124,7 @@ render(){
   
     )  }*/}
 
-    { this.state.tabAnswered === true ?
+    { this.state.tabAnswered === true && this.props.usersResponses !== null ?
      Object.keys(this.props.questions).sort(
           (a, b) => this.props.questions[b].timestamp - this.props.questions[a].timestamp
         ).filter(ak => ak = !Object.keys(this.props.usersResponses[0].answers)

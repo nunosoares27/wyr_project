@@ -1,3 +1,6 @@
 export const LOGIN = 'LOGIN'
 export const LOGOUT = 'LOGOUT'
 export const GET_USERS = 'GET_USERS'
+export const GET_QUESTIONS = 'GET_QUESTIONS'
+export const ADD_QUESTIONS = 'ADD_QUESTIONS'
+export const SAVE_QUESTION_ANSWER = 'SAVE_QUESTION_ANSWER'
