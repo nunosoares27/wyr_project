@@ -24,7 +24,7 @@ toogleTab(){
 
 render(){
   return (
-     this.props.loading ? (
+     this.props.loading === true ? (
     <img
       style={{
         marginLeft: "45vw",

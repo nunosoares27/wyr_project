@@ -10,7 +10,7 @@ class LeaderBoardPage extends Component {
     }
     render() {
         return (
-            this.props.loading ? <img style={{ marginLeft: "45vw", marginTop: "35vh", width: "150px", height: "150px"}} src={loadingImg} />  : (
+            this.props.loading === true ? <img style={{ marginLeft: "45vw", marginTop: "35vh", width: "150px", height: "150px"}} src={loadingImg} />  : (
         <div>
 
           

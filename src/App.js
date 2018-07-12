@@ -87,16 +87,11 @@ componentDidUpdate(prevProps, prevState) {
             
              <Route path="/" exact render={() => (
                 <HomePage  usersResponses={Object.values(this.props.users).filter( user => user.id === this.props.loginUser)}
-             questions={this.props.questions} 
+             questions={this.props.questions}  loading={this.props.loading}
               /> ) } />
 
-
-{/*<Route path="/" exact render={() => ( <HomePage selectUser={this.state.selectUser} loginUser={this.state.loginUser} usersResponses={Object.values(this.props.users).filter( user => user.id === this.state.selectUser)}
-             questions={this.state.questions} 
-             loading={this.state.loading} /> ) } />*/}
-
-         {/*<Route exact  path="/leaderboard" render={() => ( <LeaderboardPage  users={this.props.users}   loading={this.state.loading} /> ) } />*/}
-         {/*<Route exact path="/addquestion" render={() => ( <CreateQPage createQuestion={this.createQuestion}   loading={this.state.loading} /> ) } />*/}
+         <Route exact  path="/leaderboard" render={() => ( <LeaderboardPage  users={this.props.users}   loading={this.props.loading} /> ) } />
+         <Route exact path="/addquestion" render={() => ( <CreateQPage createQuestion={this.createQuestion}   loading={this.props.loading} /> ) } />
            </Fragment> 
            )
            : (
@@ -104,7 +99,7 @@ componentDidUpdate(prevProps, prevState) {
               onUserLogin={this.onUserLogin} 
               onSelect={this.selectUser}
               selectUser={this.state.selectUser} 
-            //  loading={this.state.loading
+              loading={this.props.loading}
               />
          )} /> )
           }
@@ -119,7 +114,8 @@ const mapStateToProps = state => {
   return {
      loginUser: state.loginUser,
      users: state.users,
-     questions: state.questions
+     questions: state.questions,
+     loading: state.loading
   }
 }
 
