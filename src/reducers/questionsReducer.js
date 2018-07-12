@@ -1,4 +1,4 @@
-import { GET_QUESTIONS } from '../actions/actionTypes'
+import { GET_QUESTIONS, ADD_QUESTIONS } from '../actions/actionTypes'
 
 const questionsReducer = (state={}, action) => {
         switch(action.type) {
@@ -6,6 +6,11 @@ const questionsReducer = (state={}, action) => {
             return {
                 ...state,
                 ...action.questions
+            }
+            case ADD_QUESTIONS:
+            return{
+                ...state,
+                [action.question.id]: action.question
             }
             default:
             return state

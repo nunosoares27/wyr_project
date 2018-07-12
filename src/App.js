@@ -91,7 +91,7 @@ componentDidUpdate(prevProps, prevState) {
               /> ) } />
 
          <Route exact  path="/leaderboard" render={() => ( <LeaderboardPage  users={this.props.users}   loading={this.props.loading} /> ) } />
-         <Route exact path="/addquestion" render={() => ( <CreateQPage createQuestion={this.createQuestion}   loading={this.props.loading} /> ) } />
+         <Route exact path="/addquestion" render={() => ( <CreateQPage   loading={this.props.loading} /> ) } />
            </Fragment> 
            )
            : (

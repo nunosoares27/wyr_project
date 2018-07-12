@@ -1,6 +1,9 @@
 import React, {Component} from 'react'
+import { connect } from 'react-redux'
 import loadingImg from '../img/loading.gif'
 import {_saveQuestion} from '../_DATA'
+import { bindActionCreators } from 'redux'
+import { handleQuestion} from '../actions/common'
 
 class CreateQPage extends Component {
   constructor(props){
@@ -20,9 +23,8 @@ onChangeField(e, name){
 
 onFormSubmit(e) {
   e.preventDefault()
-  return _saveQuestion({
-    optionOneText: this.state.fquestion, optionTwoText: this.state.squestion, author: this.props.selectUser
-  }).then((res) => { this.props.createQuestion(res) } )
+  const { fquestion, squestion } = this.state
+    this.props.handleQuestion(fquestion, squestion)
 }
 
 render(){
@@ -65,4 +67,10 @@ render(){
 }
 }
 
-export default CreateQPage;
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({
+   handleQuestion 
+  }, dispatch)
+}
+
+export default connect(null, mapDispatchToProps)(CreateQPage);
