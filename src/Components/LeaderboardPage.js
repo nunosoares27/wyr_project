@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
 import loadingImg from '../img/loading.gif'
 
 class LeaderBoardPage extends Component {
@@ -30,18 +31,20 @@ class LeaderBoardPage extends Component {
         <th>User</th>
         <th>Questions Created</th>
         <th>Questions Answered</th>
+        <th>Score</th>
       </tr>
     </thead>
     <tbody>
         {
-            Object.values(this.props.users).map(user => (
+            this.props.leader.map((user, index) => (
             <tr key={user.id}>
-        <td>1</td>
+        <td>{index + 1}</td>
         <td> <img style={{height: "60px", width: "60px", borderRadius: "50%", marginLeft: "15px", marginRight: "15px" }} 
     src={user.avatarURL ? user.avatarURL : '/img/default-user.png' } alt='Card image cap'/>
 {user.name}</td>
-        <td>{user.questions.length}</td>
-        <td>{Object.values(user.answers).length}</td>
+        <td>{user.created}</td>
+        <td>{user.answered}</td>
+        <td>{ user.created + user.answered}</td>
       </tr>
         )) 
         
@@ -64,4 +67,17 @@ class LeaderBoardPage extends Component {
     }
 }
 
-export default LeaderBoardPage;
+const mapStateToProps = ({ users }) => {
+    const leader = Object.keys(users).map(id => ({
+    id,
+    created : users[id].questions.length,
+    answered: Object.keys(users[id].answers).length,
+    name: users[id].name,
+    avatarURL: users[id].avatarURL
+  })).sort((a, b) =>  b.created + b.answered - (a.created + a.answered))
+  return {
+    leader
+  }
+}
+
+export default connect(mapStateToProps)(LeaderBoardPage);

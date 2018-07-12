@@ -33,6 +33,7 @@ class App extends Component {
 
   onUserLogout(){
     this.props.LogOutUser()
+    this.props.history.push('/');
   }
 
   onUserLogin(){

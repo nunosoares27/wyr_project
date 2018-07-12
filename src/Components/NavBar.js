@@ -48,7 +48,7 @@ const NavBar = (props) => (
   <div className="collapse navbar-collapse" id="navbarNav">
     <div className="ml-auto">
      <button onClick={ () => { 
-        props.history.push('/');
+        props.history.push('/')
        }  } className="btn-outline-danger navbar-text" style={{color: "white"}}>
          
      Log In
