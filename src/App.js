@@ -6,7 +6,7 @@ import CreateQPage from './Components/CreateQPage'
 import Page404 from './Components/Page404'
 import LeaderboardPage from './Components/LeaderboardPage'
 import NavBar from './Components/NavBar'
-import {Route, Switch, withRouter} from "react-router-dom"
+import {BrowserRouter as Router, Route, Switch, withRouter} from "react-router-dom"
 import './App.css';
 import { connect } from 'react-redux'
 import { LoginUser, LogOutUser } from './actions/authentication'
@@ -78,7 +78,8 @@ componentDidUpdate(prevProps, prevState) {
 
   render() {
     return (
-      <div >
+      <Router >
+        <Fragment>
         <NavBar onUserLogout={this.onUserLogout}  loginUser={this.props.loginUser} selectIcon={this.state.selectIcon}   />
         <Switch>
           {this.props.loginUser !== null && this.props.loginUser !== undefined && this.props.loginUser !== ''  ? 
@@ -105,7 +106,8 @@ componentDidUpdate(prevProps, prevState) {
           }
              <Route component={Page404}/>
        </Switch>
-      </div>
+       </Fragment>
+      </Router>
     );
   }
 }

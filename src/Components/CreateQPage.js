@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import { Route , withRouter} from 'react-router-dom';
 import { connect } from 'react-redux'
 import loadingImg from '../img/loading.gif'
 import {_saveQuestion} from '../_DATA'
@@ -25,6 +26,7 @@ onFormSubmit(e) {
   e.preventDefault()
   const { fquestion, squestion } = this.state
     this.props.handleQuestion(fquestion, squestion)
+    this.props.history.push('/')
 }
 
 render(){
@@ -73,4 +75,4 @@ const mapDispatchToProps = (dispatch) => {
   }, dispatch)
 }
 
-export default connect(null, mapDispatchToProps)(CreateQPage);
+export default withRouter(connect(null, mapDispatchToProps)(CreateQPage));
