@@ -74,19 +74,19 @@ render(){
               style={{ marginBottom: "20px" }}
               key={question.id}
             >
-              <div className="card-body">
-                <h5 className="card-title">
-                  Author: {question.author}{" "}
+              <div>
+                <h5 className="card-header" style={{ margin: "0px" }}>
+                 {question.author} asks {" "}
                   <TimeAgo date={new Date(question.timestamp)} />{" "}
                 </h5>
-                <div style={{ marginRight: "15px" }}>
+                <div style={{ paddingRight: "25px", paddingTop: "25px", paddingLeft: "25px", paddingBottom: "25px" }}>
                   {question.optionOne.text}{" "}
                   {question.optionOne.votes.filter(
                     a => a === this.props.selectUser
                   ).map(q => <span>&#x2705;</span>)
                   }
                 </div>
-                <div title={question.optionTwo.votes}>
+                <div style={{ paddingRight: "25px", paddingTop: "25px", paddingLeft: "25px", paddingBottom: "25px" }} title={question.optionTwo.votes}>
                   {question.optionTwo.text}{" "}
                   {question.optionTwo.votes.filter(
                     a => a === this.props.selectUser 
@@ -140,15 +140,15 @@ render(){
               key={ua.id}
             >
             
-              <div className="card-body">
-                <h5 className="card-title">
-                  Author: {ua.author}{" "}
+              <div >
+                <h5 className="card-header">
+                  {ua.author} asks {" "}
                   <TimeAgo date={new Date(ua.timestamp)} />{" "}
                 </h5>
-                <div style={{ marginRight: "15px" }}>
+                <div style={{ paddingRight: "25px", paddingTop: "25px", paddingLeft: "25px" }}>
                   {ua.optionOne.text}
                 </div>
-                <div title={ua.optionTwo.votes}>
+                <div style={{ paddingRight: "25px", paddingTop: "25px", paddingLeft: "25px", paddingBottom: "25px" }}>
                   {ua.optionTwo.text}
                 </div>
               </div>

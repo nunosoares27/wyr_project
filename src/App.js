@@ -51,8 +51,8 @@ class App extends Component {
       
        
        this.setState({
-          selectUser: 'tylermcginnis',
-          selectIcon: '/img/mcginnis.jpg'
+          selectUser: '',
+          selectIcon: ''
         })
 
     this.props.initialData()
@@ -88,7 +88,7 @@ componentDidUpdate(prevProps, prevState) {
               <Fragment>
             
              <Route path="/" exact render={() => (
-                <HomePage  usersResponses={Object.values(this.props.users).filter( user => user.id === this.props.loginUser)}
+                <HomePage selectUser={this.state.selectUser}  usersResponses={Object.values(this.props.users).filter( user => user.id === this.props.loginUser)}
              questions={this.props.questions}  loading={this.props.loading}
               /> ) } />
 
