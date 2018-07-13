@@ -3,6 +3,7 @@ import React, { Component, Fragment } from 'react'
 import LoginPage from './Components/LoginPage'
 import HomePage from './Components/HomePage'
 import CreateQPage from './Components/CreateQPage'
+import DetailQuestionPage from './Components/DetailQuestionPage'
 import Page404 from './Components/Page404'
 import LeaderboardPage from './Components/LeaderboardPage'
 import NavBar from './Components/NavBar'
@@ -95,17 +96,18 @@ componentDidUpdate(prevProps, prevState) {
             ( 
               <Fragment>
             
-             <Route path="/" exact render={() => (
+             <Route exact path="/" exact render={() => (
                 <HomePage selectUser={this.state.selectUser}  usersResponses={Object.values(this.props.users).filter( user => user.id === this.props.loginUser)}
              questions={this.props.questions}  loading={this.props.loading}
               /> ) } />
 
-         <Route exact  path="/leaderboard" render={() => ( <LeaderboardPage  users={this.props.users}   loading={this.props.loading} /> ) } />
-         <Route exact path="/addquestion" render={() => ( <CreateQPage   loading={this.props.loading} /> ) } />
+         <Route  exact path="/leaderboard" render={() => ( <LeaderboardPage  users={this.props.users}   loading={this.props.loading} /> ) } />
+         <Route exact  path="/addquestion" render={() => ( <CreateQPage   loading={this.props.loading} /> ) } />
+         <Route path='/question/:id' component={DetailQuestionPage} />
            </Fragment> 
            )
            : (
-              <Route exact={true} path="/" render={() => (<LoginPage 
+              <Route  path="/" render={() => (<LoginPage 
               onUserLogin={this.onUserLogin} 
               onSelect={this.selectUser}
               clearUser={this.onClearUser}
