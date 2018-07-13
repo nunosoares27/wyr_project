@@ -29,6 +29,14 @@ class App extends Component {
     this.createQuestion = this.createQuestion.bind(this)
     this.onUserLogin = this.onUserLogin.bind(this)
     this.onUserLogout = this.onUserLogout.bind(this)
+    this.onClearUser = this.onClearUser.bind(this)
+  }
+
+  onClearUser(){
+    this.setState({
+      selectUser: '',
+      selectIcon: ''
+    })
   }
 
   onUserLogout(){
@@ -100,6 +108,7 @@ componentDidUpdate(prevProps, prevState) {
               <Route exact={true} path="/" render={() => (<LoginPage 
               onUserLogin={this.onUserLogin} 
               onSelect={this.selectUser}
+              clearUser={this.onClearUser}
               selectUser={this.state.selectUser} 
               loading={this.props.loading}
               />

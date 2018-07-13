@@ -42,8 +42,13 @@ class LoginPage extends Component {
       
       }
       <div className="col-lg-12 col-md-12 col-sm-12 text-center" style={{ marginTop: "5vh", marginBottom: "5vh"}}>
+
+      { this.props.selectUser !== '' &&  
+      <button style={{marginRight: "15px"}} onClick={this.props.clearUser} className="btn btn-outline-danger btn-lg">Clear selection</button> }
+       
         
           <button onClick={this.props.onUserLogin} className="btn btn-outline-success btn-lg">Login</button>
+          
        
         </div>
 
