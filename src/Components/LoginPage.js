@@ -46,8 +46,9 @@ class LoginPage extends Component {
       { this.props.selectUser !== '' &&  
       <button style={{marginRight: "15px"}} onClick={this.props.clearUser} className="btn btn-outline-danger btn-lg">Clear selection</button> }
        
-        
-          <button onClick={this.props.onUserLogin} className="btn btn-outline-success btn-lg">Login</button>
+        { this.props.selectUser !== ''&& 
+         <button onClick={this.props.onUserLogin} className="btn btn-outline-success btn-lg">Login</button>}
+         
           
        
         </div>
