@@ -46,6 +46,12 @@ class DetailQuestionPage extends Component {
                           paddingLeft: "25px"
                         }}
                       >
+
+                       <div style={{ marginBottom: "50px"}}>
+        <img src={questionAuthor.avatarURL} className="card-img-top" style={{height: "250px", width: "250px"}} alt={`Avatar of ${questionAuthor.name}`}/>
+        <span style={{ fontSize: "25px", marginLeft: "25px"}}><b>Author: {questionAuthor.name}</b></span>
+      </div>
+
                        {question.optionOne.text}  {isOptionOneAnswered ?<span style={{ marginLeft: "25px" }}>&#x2705; (your answer)</span> : null}
                        <div className="progress">
   <div class="progress-bar" role="progressbar" 
