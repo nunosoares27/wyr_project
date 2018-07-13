@@ -56,8 +56,8 @@ class DetailQuestionPage extends Component {
                        <div className="progress">
   <div class="progress-bar" role="progressbar" 
   style={{width: `${percentageOptionOne}%`}} aria-valuenow="25" aria-valuemin="0" aria-valuemax={percentageOptionOne}></div>
-  ({optionOneVotes} vote(s)| {percentageOptionOne}%)
 </div>
+ ({optionOneVotes} vote(s)| {percentageOptionOne}%)
                        
                       </div>
                       <div
@@ -71,9 +71,9 @@ class DetailQuestionPage extends Component {
                        {question.optionTwo.text}   {!isOptionOneAnswered ? <span style={{ marginLeft: "25px" }}>&#x2705; (your answer)</span> : null} 
                        <div className="progress">
   <div class="progress-bar" role="progressbar" style={{width: `${percentageOptionTwo}%`}} aria-valuenow="25" aria-valuemin="0" aria-valuemax={percentageOptionTwo}></div>
-  ({optionTwoVotes} vote(s) | {percentageOptionTwo}%)
+  
 </div>
-                     
+      ({optionTwoVotes} vote(s) | {percentageOptionTwo}%)               
                       </div>
                       <button
                         style={{ marginBottom: "25px", marginLeft: "25px" }}

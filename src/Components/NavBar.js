@@ -51,7 +51,7 @@ const NavBar = (props) => (
         props.history.push('/')
        }  } className="btn-outline-danger navbar-text" style={{color: "white"}}>
          
-     Log In
+     Login
 
     </button>
     </div>
