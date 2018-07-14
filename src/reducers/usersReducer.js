@@ -1,4 +1,4 @@
-import { GET_USERS, ADD_USER_QUESTION } from '../actions/actionTypes'
+import { GET_USERS, ADD_USER_QUESTION, SAVE_QUESTION_ANSWER } from '../actions/actionTypes'
 
 const usersReducer = (state=null, action) => 
 {
@@ -16,7 +16,17 @@ const usersReducer = (state=null, action) =>
           questions: state[action.loginUser].questions.concat([action.questionId])
         }
       }
-           
+       case SAVE_QUESTION_ANSWER :
+      return {
+        ...state,
+        [action.loginUser]: {
+          ...state[action.loginUser],
+          answers: {
+            ...state[action.loginUser].answers,
+            [action.questionId]: action.answer
+          }
+        }
+      } 
         default:
         return state
     }

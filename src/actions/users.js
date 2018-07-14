@@ -1,4 +1,4 @@
-import { GET_USERS, ADD_USER_QUESTION } from './actionTypes'
+import { GET_USERS, ADD_USER_QUESTION, SAVE_QUESTION_ANSWER } from './actionTypes'
 
 export const getUsers = (users) => {
     return {
@@ -12,5 +12,14 @@ export const addUserQuestion = (loginUser, questionId) => {
         type: ADD_USER_QUESTION,
         loginUser,
         questionId
+    }
+}
+
+export const addUserAnswer = (loginUser, questionId, answer) => {
+    return {
+        type: SAVE_QUESTION_ANSWER,
+        loginUser,
+        questionId,
+        answer
     }
 }

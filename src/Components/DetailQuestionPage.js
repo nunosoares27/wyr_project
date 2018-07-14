@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import { Redirect, withRouter } from 'react-router-dom'
+import { bindActionCreators } from 'redux'
+import { handleSaveQuestionAnswer } from '../actions/common'
 
 class DetailQuestionPage extends Component {
     constructor(props){
@@ -8,6 +10,21 @@ class DetailQuestionPage extends Component {
         this.state = {
             selectOption: ''
         }
+        this.optionSelected = this.optionSelected.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)
+    }
+
+    optionSelected(e){
+      this.setState({
+        selectOption: e.target.value
+      })
+    }
+
+    handleSubmit(e){
+        e.preventDefault()
+       const{id} = this.props.match.params
+      this.props.handleSaveQuestionAnswer(id, this.state.selectOption)
+    //   this.props.history.push('/')
     }
     render(){
         const { question, questionAuthor, isAnswered, isOptionOneAnswered} = this.props
@@ -85,6 +102,7 @@ class DetailQuestionPage extends Component {
                     </div>
                   </div>
 : 
+ <form onSubmit={this.handleSubmit}>
  <div
                     className="card"
                     style={{ marginBottom: "20px" }}
@@ -102,7 +120,13 @@ class DetailQuestionPage extends Component {
                           paddingLeft: "25px"
                         }}
                       >
-                      
+                      <div style={{ marginBottom: "50px"}}>
+        <img src={questionAuthor.avatarURL} className="card-img-top" style={{height: "250px", width: "250px"}} alt={`Avatar of ${questionAuthor.name}`}/>
+        <span style={{ fontSize: "25px", marginLeft: "25px"}}><b>Author: {questionAuthor.name}</b></span>
+      </div>
+       
+                       <input type="radio" name="radio1" value="optionOne" onChange={this.optionSelected}/>{' '}
+                        {question.optionOne.text}
                       </div>
                       <div
                         style={{
@@ -112,7 +136,8 @@ class DetailQuestionPage extends Component {
                           paddingBottom: "25px"
                         }}
                       >
-                       
+                        <input type="radio" name="radio1" value="optionTwo" onChange={this.optionSelected}/>{' '}
+                        {question.optionTwo.text}
                       </div>
                       <button
                         style={{ marginBottom: "25px", marginLeft: "25px" }}
@@ -123,6 +148,7 @@ class DetailQuestionPage extends Component {
                       </button>
                     </div>
                   </div>
+                 </form>
               }
               
                   </div>
@@ -147,4 +173,10 @@ const mapStateToProps = ({questions, users, loginUser }, props) => {
     }
 }
 
-export default withRouter(connect(mapStateToProps)(DetailQuestionPage))
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({
+     handleSaveQuestionAnswer
+   }, dispatch)
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(DetailQuestionPage))
